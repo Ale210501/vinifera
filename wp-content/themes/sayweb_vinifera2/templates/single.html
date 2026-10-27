@@ -1,0 +1,39 @@
+<!-- wp:template-part {"slug":"header","theme":"sayweb_vinifera","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"site-main","layout":{"type":"constrained"}} -->
+<main class="wp-block-group site-main">
+  <!-- wp:group -->
+  <div class="wp-block-group">
+    <!-- wp:post-terms {"term":"category","fontSize":"small"} /-->
+    <!-- wp:post-title {"level":1} /-->
+
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","alignItems":"center"}} -->
+    <div class="wp-block-group">
+      <!-- wp:post-author-name {"isLink":false,"fontSize":"small","textColor":"contrast-2"} /-->
+      <!-- wp:post-date {"fontSize":"small","textColor":"contrast-2"} /-->
+    </div>
+    <!-- /wp:group -->
+  </div>
+  <!-- /wp:group -->
+
+  <!-- wp:post-featured-image {"aspectRatio":"16/9"} /-->
+  <!-- wp:post-content /-->
+  <!-- wp:post-terms {"term":"post_tag"} /-->
+
+  <!-- wp:separator -->
+  <hr class="wp-block-separator has-alpha-channel-opacity"/>
+  <!-- /wp:separator -->
+
+  <!-- wp:comments -->
+  <div class="wp-block-comments">
+    <!-- wp:comments-title /-->
+    <!-- wp:comment-template -->
+      <!-- wp:comment-content /-->
+    <!-- /wp:comment-template -->
+    <!-- wp:post-comments-form /-->
+  </div>
+  <!-- /wp:comments -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","theme":"sayweb_vinifera","area":"footer"} /-->

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "vinifera/contact-map",
+  "title": "Vinifera Contact Map",
+  "category": "widgets",
+  "description": "Dynamic Google Maps block for Vinifera contact pages.",
+  "attributes": {
+    "eyebrow": { "type": "string", "default": "Vinifera Enoteca" },
+    "title": { "type": "string", "default": "Largo Piave 10/11" },
+    "addressText": { "type": "string", "default": "70010 Locorotondo (BA), nel centro storico della Valle d'Itria." },
+    "pinText": { "type": "string", "default": "Mappa segnaposto" },
+    "coordsLabel": { "type": "string", "default": "Coordinate" },
+    "latitude": { "type": "string", "default": "40.7243" },
+    "longitude": { "type": "string", "default": "17.3298" },
+    "zoom": { "type": "string", "default": "16" },
+    "linkLabel": { "type": "string", "default": "Apri in Google Maps →" },
+    "linkUrl": { "type": "string", "default": "https://www.google.com/maps/search/?api=1&query=Largo+Piave+10%2F11+70010+Locorotondo" }
+  },
+  "editorScript": "file:./editor.js"
+}

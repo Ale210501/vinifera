@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinifera Enoteca — Locorotondo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Brand identity Vinifera — rebalanced */
+    --main:#5E293B;          /* bordeaux/wine principale */
+    --main-hover:#7a3a4f;
+    --main-dark:#3d1a26;     /* wine scuro (titoli, footer, trust bar) */
+    --accent:#354c04;        /* verde oliva secondario (highlight, italic em, badges) */
+    --accent-dark:#243305;
+    --gurkha:#999373;        /* khaki oliva (dettagli) */
+    --gold:#b8923a;          /* dorato sottile per highlight su dark */
+    --cream:#FBF9ED;         /* crema chiaro */
+    --cream-2:#f3efde;
+    --paper:#ffffff;
+    --ink:#333333;
+    --ink-2:#1f1f1f;
+    --muted:#7a7568;
+    --line:#e6e0c8;
+    --shadow:0 30px 80px -30px rgba(61,26,38,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+  /* TIPOGRAFIA — basata sui font del sito Vinifera */
+  .h-condensed{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.03em;font-weight:500;line-height:1.05}
+  .h-display{font-family:"Manrope",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.05;color:var(--main-dark)}
+
+  h1{font-family:"Barlow Condensed",sans-serif;font-weight:500;text-transform:uppercase;line-height:1;letter-spacing:.01em;color:var(--main-dark);font-size:clamp(3rem,6vw,5.6rem)}
+  h2{font-family:"Barlow Condensed",sans-serif;font-weight:500;text-transform:uppercase;line-height:1.02;letter-spacing:.015em;color:var(--main-dark);font-size:clamp(2.2rem,4.2vw,3.6rem)}
+  h3{font-family:"Barlow Condensed",sans-serif;font-weight:500;text-transform:uppercase;line-height:1.1;letter-spacing:.025em;color:var(--main-dark);font-size:1.5rem}
+  h4{font-family:"Manrope",sans-serif;font-weight:700;color:var(--main-dark);font-size:1rem;letter-spacing:.01em}
+
+  .eyebrow{
+    font-family:"Barlow Condensed",sans-serif;font-weight:500;
+    font-size:.92rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  .eyebrow.olive{color:var(--main)}
+  .eyebrow.cream{color:var(--gurkha)}
+
+  /* ============ ANNOUNCEMENT BAR ============ */
+  .announce{
+    background:var(--main-dark);color:var(--cream);
+    font-family:"Barlow Condensed",sans-serif;font-weight:500;
+    font-size:.84rem;letter-spacing:.18em;
+    text-transform:uppercase;text-align:center;padding:11px 16px;
+  }
+  .announce span{color:#d4c97a;font-weight:600}
+  .announce .sep{margin:0 14px;opacity:.4}
+
+  /* ============ TOP BAR ============ */
+  .topbar{
+    position:sticky;top:0;z-index:200;
+    background:rgba(255,255,255,.97);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;gap:32px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{height:60px;width:auto}
+  .topnav{display:flex;gap:24px;font-family:"Barlow Condensed",sans-serif;font-size:.96rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--main-dark)}
+  .topnav a{position:relative;padding:6px 0;transition:color .2s;white-space:nowrap}
+  .topnav a:hover{color:var(--accent)}
+  .topactions{display:flex;align-items:center;gap:10px}
+  .topactions .icobtn{width:42px;height:42px;border-radius:50%;background:transparent;border:1px solid var(--line);display:grid;place-items:center;color:var(--main-dark);transition:all .2s;position:relative}
+  .topactions .icobtn svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .topactions .icobtn:hover{background:var(--main-dark);color:var(--cream);border-color:var(--main-dark)}
+  .topactions .cart-count{position:absolute;top:-4px;right:-4px;background:var(--accent);color:var(--cream);font-family:"Manrope",sans-serif;font-size:.66rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--paper)}
+  .topactions .wa{background:var(--main);color:var(--cream);padding:13px 22px;border-radius:0;font-family:"Barlow Condensed",sans-serif;font-size:.94rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;display:inline-flex;align-items:center;gap:9px;transition:background .2s}
+  .topactions .wa:hover{background:var(--main-hover)}
+  .topactions .wa::before{content:"";width:7px;height:7px;border-radius:50%;background:#a7d96f;box-shadow:0 0 8px #a7d96f}
+  @media(max-width:1200px){.topnav{display:none}}
+
+  /* ============ MEGA MENU (categorie vino) ============ */
+  .topnav .nav-item{position:static;display:flex;align-items:center}
+  .topnav .nav-item.has-mega > a{display:inline-flex;align-items:center;gap:7px}
+  .topnav .nav-item.has-mega > a::after{
+    content:"";width:6px;height:6px;
+    border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg) translateY(-1px);transition:transform .22s,opacity .22s;opacity:.55;
+  }
+  .topnav .nav-item.has-mega:hover > a::after{transform:rotate(225deg) translateY(1px);opacity:1}
+  .mega{
+    position:absolute;left:0;right:0;top:100%;
+    background:var(--paper);border-top:1px solid var(--line);
+    box-shadow:0 34px 64px -30px rgba(61,26,38,.32);
+    opacity:0;visibility:hidden;transform:translateY(10px);
+    transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;
+    z-index:190;
+  }
+  .topnav .nav-item:hover .mega{
+    opacity:1;visibility:visible;transform:translateY(0);
+    transition:opacity .22s ease,transform .22s ease,visibility 0s;
+  }
+  .mega .wrap{display:block;height:auto;gap:0;align-items:stretch;justify-content:flex-start}
+  .mega-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;padding:44px 0 50px}
+  .mega-title{
+    font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--main-dark);font-weight:600;display:block;margin-bottom:18px;
+  }
+  .topnav .mega-col{display:flex;flex-direction:column;border-left:1px solid var(--line);padding-left:30px}
+  .topnav .mega-col:first-child{border-left:0;padding-left:0}
+  .topnav .mega a{
+    font-family:"Manrope",sans-serif;font-weight:500;font-size:.97rem;
+    text-transform:none;letter-spacing:0;color:var(--muted);
+    padding:8px 0;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;
+    transition:color .18s,transform .18s;
+  }
+  .topnav .mega a:hover{color:var(--main);transform:translateX(3px)}
+  .mega-badge{
+    font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:500;
+    font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--cream-2);color:var(--gurkha);padding:3px 8px;line-height:1;
+  }
+  .topnav .mega a.mega-all{color:var(--main-dark);font-weight:700;margin-top:12px}
+  .topnav .mega a.mega-all:hover{color:var(--main)}
+
+  /* ============ HERO ============ */
+  .hero{position:relative;padding:90px 0 110px;overflow:hidden;background:var(--cream)}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(50% 60% at 90% 10%, rgba(167,20,76,.06), transparent 60%),
+      radial-gradient(50% 70% at 5% 90%, rgba(53,76,4,.05), transparent 65%);
+  }
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center}
+  .hero-pill{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--main);color:var(--cream);
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:.84rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+    padding:9px 16px;margin-bottom:20px;
+  }
+  .hero-pill::before{content:"";width:7px;height:7px;background:#a7d96f;border-radius:50%;box-shadow:0 0 8px rgba(167,217,111,.6)}
+  .hero-copy .eyebrow{margin-bottom:24px;display:inline-flex;align-items:center;gap:12px}
+  .hero-copy .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+  .hero h1{margin-bottom:30px}
+  .hero h1 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .hero-lede{font-size:1.18rem;color:var(--ink);max-width:560px;margin-bottom:42px;line-height:1.6;font-weight:400}
+  .hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:40px}
+  .btn{
+    padding:18px 32px;border-radius:0;font-family:"Barlow Condensed",sans-serif;font-size:1rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:12px;transition:all .25s;
+  }
+  .btn-primary{background:var(--main);color:var(--cream)}
+  .btn-primary:hover{background:var(--main-hover)}
+  .btn-accent{background:var(--accent);color:var(--cream)}
+  .btn-accent:hover{background:var(--accent-dark)}
+  .btn-secondary{background:transparent;color:var(--main-dark);border:1.5px solid var(--main-dark)}
+  .btn-secondary:hover{background:var(--main-dark);color:var(--cream)}
+  .btn .arrow{font-size:1.05rem;transition:transform .25s}
+  .btn:hover .arrow{transform:translateX(4px)}
+  .hero-meta{display:flex;gap:40px;padding-top:30px;border-top:1px solid var(--line)}
+  .hero-meta strong{font-family:"Manrope",sans-serif;font-size:1.7rem;font-weight:800;color:var(--main-dark);display:block;line-height:1;margin-bottom:6px}
+  .hero-meta span{font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+  /* hero visual */
+  .hero-visual{position:relative;height:640px}
+  .hero-img{
+    position:absolute;overflow:hidden;
+    background:linear-gradient(135deg,var(--cream-2),var(--line));
+    box-shadow:var(--shadow);
+  }
+  .hero-img-main{top:0;left:0;width:78%;height:88%;background:linear-gradient(160deg,#5a3144,#2a0f18)}
+  .hero-img-main::after{
+    content:"FOTO ENOTECA INTERNO";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.18em;color:rgba(251,249,237,.5);text-align:center;font-weight:500
+  }
+  .hero-img-floater{bottom:0;right:0;width:48%;height:42%;background:linear-gradient(160deg,#7a3a4f,#3d1a26);border:10px solid var(--cream)}
+  .hero-img-floater::after{
+    content:"FOTO STEFANO + MARIA TERESA";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:"Barlow Condensed",sans-serif;font-size:.78rem;letter-spacing:.16em;color:rgba(251,249,237,.55);text-align:center;padding:0 16px;font-weight:500
+  }
+  .hero-tape{
+    position:absolute;top:40px;right:24px;background:var(--accent);color:var(--cream);
+    padding:18px 22px;transform:rotate(3deg);
+    box-shadow:0 15px 35px -10px rgba(167,20,76,.4);max-width:240px;z-index:3;
+  }
+  .hero-tape .num{font-family:"Manrope",sans-serif;font-size:2.4rem;font-weight:800;line-height:1;display:block;margin-bottom:8px;letter-spacing:-.02em}
+  .hero-tape p{font-family:"Barlow Condensed",sans-serif;font-size:.92rem;line-height:1.3;letter-spacing:.06em;font-weight:500;text-transform:uppercase}
+
+  /* ============ TRUST BAR ============ */
+  .trustbar{background:var(--main-dark);color:var(--cream);padding:36px 0}
+  .trustbar .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .trust-item{display:flex;align-items:center;gap:18px;border-right:1px solid rgba(251,249,237,.13);padding:0 24px}
+  .trust-item:first-child{padding-left:0}
+  .trust-item:last-child{border-right:0;padding-right:0}
+  .trust-icon{
+    width:50px;height:50px;background:rgba(212,201,122,.14);
+    display:grid;place-items:center;font-family:"Manrope",sans-serif;color:#d4c97a;
+    flex-shrink:0;font-size:1.5rem;font-weight:700
+  }
+  .trust-item strong{display:block;font-family:"Manrope",sans-serif;font-size:1.12rem;font-weight:700;color:var(--cream);margin-bottom:3px}
+  .trust-item span{font-family:"Barlow Condensed",sans-serif;font-size:.84rem;color:rgba(251,249,237,.65);letter-spacing:.1em;text-transform:uppercase;line-height:1.4;display:block;font-weight:500}
+  @media(max-width:900px){.trustbar .wrap{grid-template-columns:repeat(2,1fr);gap:24px}.trust-item{padding:0;border:0}}
+
+  /* ============ ESPLORA IL CATALOGO ============ */
+  .cat{padding:110px 0 100px;background:var(--paper)}
+  .cat-head{text-align:center;margin-bottom:54px}
+  .cat-head .eyebrow{display:inline-block;margin-bottom:20px}
+  .cat-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .cat-card{display:flex;align-items:center;gap:20px;padding:24px;background:var(--cream);border:1px solid var(--line);transition:all .25s}
+  .cat-card:hover{background:var(--main-dark);border-color:var(--main-dark)}
+  .cat-card:hover .cat-info strong,.cat-card:hover .cat-info span{color:var(--cream)}
+  .cat-img{width:88px;height:88px;flex-shrink:0;position:relative;overflow:hidden}
+  .cat-card.cat-red .cat-img{background:linear-gradient(140deg,#7d0e38,#3a0518)}
+  .cat-card.cat-white .cat-img{background:linear-gradient(140deg,#d4c97a,#999373)}
+  .cat-card.cat-bub .cat-img{background:linear-gradient(140deg,#e8d678,#b8923a)}
+  .cat-card.cat-pug .cat-img{background:linear-gradient(140deg,#4a5a32,#243305)}
+  .cat-card.cat-box .cat-img{background:linear-gradient(140deg,#A7144C,#7d0e38)}
+  .cat-card.cat-food .cat-img{background:linear-gradient(140deg,#8e7c4e,#5a4d2d)}
+  .cat-info strong{font-family:"Barlow Condensed",sans-serif;font-size:1.45rem;font-weight:600;text-transform:uppercase;letter-spacing:.02em;color:var(--main-dark);display:block;margin-bottom:6px;transition:color .25s;line-height:1.1}
+  .cat-info span{font-family:"Manrope",sans-serif;font-size:.86rem;color:var(--muted);transition:color .25s}
+  @media(max-width:1000px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.cat-grid{grid-template-columns:1fr}}
+
+  /* ============ CHI C'È DIETRO ============ */
+  .chi{padding:110px 0 100px;background:var(--paper)}
+  .chi .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:80px;align-items:center}
+  .chi-visual{position:relative;height:520px}
+  .chi-portrait{
+    position:absolute;top:0;left:0;width:75%;height:78%;
+    background:linear-gradient(140deg,#4a5a32,#243305);overflow:hidden;box-shadow:var(--shadow)
+  }
+  .chi-portrait::after{
+    content:"RITRATTO STEFANO";position:absolute;inset:0;display:grid;place-items:center;
+    font-family:"Barlow Condensed",sans-serif;font-size:.84rem;letter-spacing:.18em;color:rgba(251,249,237,.45);font-weight:500
+  }
+  .chi-portrait-2{
+    position:absolute;bottom:0;right:0;width:62%;height:55%;
+    background:linear-gradient(140deg,#7d0e38,#3a0518);overflow:hidden;border:12px solid var(--paper);
+    box-shadow:0 30px 60px -20px rgba(36,51,5,.4)
+  }
+  .chi-portrait-2::after{
+    content:"RITRATTO MARIA TERESA";position:absolute;inset:0;display:grid;place-items:center;
+    font-family:"Barlow Condensed",sans-serif;font-size:.8rem;letter-spacing:.16em;color:rgba(251,249,237,.5);text-align:center;padding:0 12px;font-weight:500
+  }
+  .chi-copy .eyebrow{margin-bottom:24px}
+  .chi-copy h2{margin-bottom:32px}
+  .chi-copy h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .chi-copy p{font-size:1.06rem;color:var(--ink);margin-bottom:24px;max-width:560px;line-height:1.7}
+  .chi-sign{display:flex;gap:40px;align-items:center;margin-top:40px;padding-top:30px;border-top:1px solid var(--line)}
+  .chi-sign-name{font-family:"Manrope",sans-serif;font-style:italic;font-size:1.32rem;font-weight:700;color:var(--main)}
+  .chi-sign-role{font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:500}
+
+  /* ============ SELEZIONE DEL MOMENTO ============ */
+  .selez{padding:110px 0;background:var(--cream)}
+  .selez-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;gap:40px;flex-wrap:wrap}
+  .selez-head h2{max-width:720px}
+  .selez-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .selez-head .eyebrow{display:block;margin-bottom:18px}
+  .selez-head .vedi{font-family:"Barlow Condensed",sans-serif;font-size:.96rem;letter-spacing:.16em;text-transform:uppercase;color:var(--main);font-weight:600;display:inline-flex;align-items:center;gap:10px;border-bottom:2px solid var(--main);padding-bottom:6px}
+  .selez-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .wine-card{background:var(--paper);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;border:1px solid var(--line)}
+  .wine-card:hover{transform:translateY(-6px);box-shadow:0 30px 50px -25px rgba(36,51,5,.25)}
+  .wine-img{height:340px;position:relative;background:linear-gradient(170deg,#3d4e1a,#1a2402);display:grid;place-items:center;overflow:hidden}
+  .wine-img::after{content:"FOTO BOTTIGLIA";font-family:"Barlow Condensed",sans-serif;font-size:.76rem;letter-spacing:.18em;color:rgba(251,249,237,.42);font-weight:500}
+  .wine-img .badge{position:absolute;top:14px;left:14px;background:var(--accent);color:var(--cream);font-family:"Barlow Condensed",sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;font-weight:600;z-index:2}
+  .wine-img .badge.badge-olive{background:var(--main)}
+  .wine-info{padding:26px;display:flex;flex-direction:column;flex:1}
+  .wine-region{font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--main);margin-bottom:10px;font-weight:600}
+  .wine-name{font-family:"Barlow Condensed",sans-serif;font-size:1.4rem;font-weight:600;text-transform:uppercase;letter-spacing:.02em;line-height:1.15;margin-bottom:6px;color:var(--main-dark)}
+  .wine-producer{font-family:"Manrope",sans-serif;font-size:.88rem;color:var(--muted);margin-bottom:18px;font-style:italic;font-weight:500}
+  .wine-quote{background:var(--cream);border-left:3px solid var(--accent);padding:14px 16px;margin-bottom:22px;font-size:.92rem;color:var(--ink);line-height:1.55;font-family:"Manrope",sans-serif;flex:1}
+  .wine-quote::before{content:"STEFANO DICE";display:block;font-family:"Barlow Condensed",sans-serif;font-size:.7rem;letter-spacing:.18em;color:var(--accent);margin-bottom:8px;font-weight:600;text-transform:uppercase}
+  .wine-foot{display:flex;justify-content:space-between;align-items:center}
+  .wine-price{font-family:"Manrope",sans-serif;font-size:1.5rem;font-weight:800;color:var(--main-dark);letter-spacing:-.01em}
+  .wine-add{background:var(--main-dark);color:var(--cream);padding:11px 18px;font-family:"Barlow Condensed",sans-serif;font-size:.84rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;transition:background .2s}
+  .wine-add:hover{background:var(--main)}
+  @media(max-width:1100px){.selez-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ============ PERSONAL SOMMELIER ============ */
+  .pers{padding:120px 0;background:var(--main-dark);color:var(--cream);position:relative;overflow:hidden}
+  .pers::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(60% 70% at 80% 30%, rgba(167,20,76,.18), transparent 60%);
+  }
+  .pers .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .pers-copy h2{color:var(--cream)}
+  .pers-copy h2 em{font-style:italic;font-weight:400;color:#d4c97a;text-transform:lowercase}
+  .pers-copy .eyebrow{color:#d4c97a;margin-bottom:24px}
+  .pers-copy h2{margin-bottom:30px}
+  .pers-copy p{font-family:"Manrope",sans-serif;font-size:1.1rem;color:rgba(251,249,237,.82);margin-bottom:34px;max-width:520px;line-height:1.65}
+  .pers-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:42px}
+  .btn-wa{background:#25d366;color:#0a1810;padding:18px 30px;font-family:"Barlow Condensed",sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;display:inline-flex;align-items:center;gap:11px;transition:background .2s}
+  .btn-wa:hover{background:#1ea952}
+  .btn-outline{background:transparent;color:var(--cream);border:1.5px solid rgba(251,249,237,.35);padding:17px 30px;font-family:"Barlow Condensed",sans-serif;font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;display:inline-flex;align-items:center;gap:11px;transition:all .2s}
+  .btn-outline:hover{background:var(--cream);color:var(--main-dark);border-color:var(--cream)}
+  .pers-meta{display:flex;gap:38px}
+  .pers-meta strong{color:#d4c97a;font-family:"Manrope",sans-serif;font-size:1.25rem;font-weight:800;display:block;line-height:1;margin-bottom:6px}
+  .pers-meta span{font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,249,237,.6);font-weight:500}
+
+  /* chat mockup */
+  .pers-chat{background:#0a1810;padding:26px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);max-width:480px;margin-left:auto;border:1px solid rgba(212,201,122,.14)}
+  .pers-chat-head{display:flex;align-items:center;gap:14px;padding-bottom:18px;border-bottom:1px solid rgba(251,249,237,.08);margin-bottom:18px}
+  .pers-chat-avatar{width:48px;height:48px;background:linear-gradient(140deg,#7a3a4f,#3d1a26);display:grid;place-items:center;font-family:"Manrope",sans-serif;font-weight:800;color:#d4c97a;font-size:1.3rem}
+  .pers-chat-name{font-family:"Manrope",sans-serif;font-weight:700;color:var(--cream);font-size:1.02rem}
+  .pers-chat-status{font-family:"Barlow Condensed",sans-serif;font-size:.78rem;color:#a7d96f;display:flex;align-items:center;gap:7px;margin-top:3px;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+  .pers-chat-status::before{content:"";width:6px;height:6px;border-radius:50%;background:#a7d96f}
+  .msg{padding:13px 17px;margin-bottom:10px;font-size:.95rem;max-width:82%;line-height:1.5;font-family:"Manrope",sans-serif}
+  .msg-you{background:rgba(251,249,237,.08);color:var(--cream)}
+  .msg-me{background:#25d366;color:#0a1810;margin-left:auto;font-weight:500}
+  .msg-time{font-family:"Barlow Condensed",sans-serif;font-size:.7rem;color:rgba(251,249,237,.42);letter-spacing:.12em;padding-left:6px;margin-bottom:14px;font-weight:500}
+  .msg-me + .msg-time{text-align:right;padding-right:6px}
+
+  /* ============ CONFRONTO PREZZI ============ */
+  .compare{padding:120px 0;background:var(--cream)}
+  .compare-head{text-align:center;max-width:820px;margin:0 auto 60px}
+  .compare-head .eyebrow{display:inline-block;margin-bottom:22px}
+  .compare-head h2{margin-bottom:20px}
+  .compare-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .compare-head p{font-family:"Manrope",sans-serif;font-size:1.1rem;color:var(--muted)}
+  .compare-table{max-width:960px;margin:0 auto;background:var(--paper);overflow:hidden;box-shadow:0 30px 60px -30px rgba(61,26,38,.2);border:1px solid var(--line)}
+  .compare-row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;align-items:center;padding:24px 30px;border-bottom:1px solid var(--line)}
+  .compare-row:last-child{border-bottom:0}
+  .compare-head-row{background:var(--main-dark);color:var(--cream);padding:22px 30px;font-family:"Barlow Condensed",sans-serif;font-size:.86rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+  .compare-head-row span{text-align:center}
+  .compare-head-row span:first-child{text-align:left}
+  .compare-head-row .col-vinifera{color:#d4c97a;font-weight:700}
+  .compare-bottle{display:flex;align-items:center;gap:14px}
+  .compare-bottle-img{width:44px;height:44px;background:linear-gradient(160deg,#3d4e1a,#1a2402);flex-shrink:0}
+  .compare-bottle strong{font-family:"Barlow Condensed",sans-serif;font-size:1.12rem;font-weight:600;text-transform:uppercase;letter-spacing:.02em;display:block;margin-bottom:3px;color:var(--main-dark)}
+  .compare-bottle small{font-family:"Manrope",sans-serif;font-size:.82rem;color:var(--muted);font-style:italic}
+  .compare-price{text-align:center;font-family:"Manrope",sans-serif;font-size:1.28rem;font-weight:700;color:var(--ink-2)}
+  .compare-price.win{color:var(--main);position:relative}
+  .compare-price.win::after{content:"il più basso";display:block;font-family:"Barlow Condensed",sans-serif;font-size:.66rem;letter-spacing:.16em;color:var(--accent);font-weight:600;margin-top:4px;text-transform:uppercase}
+  .compare-diff{text-align:center;font-family:"Manrope",sans-serif;font-size:1.18rem;font-weight:700;color:var(--accent);letter-spacing:-.01em}
+  .compare-foot{text-align:center;margin-top:38px;font-family:"Barlow Condensed",sans-serif;font-size:.86rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+
+  /* ============ SPEDIZIONI ============ */
+  .ship{background:var(--paper);padding:64px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .ship .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .ship-item{display:flex;align-items:flex-start;gap:16px}
+  .ship-icon{width:50px;height:50px;background:var(--main-dark);color:#d4c97a;display:grid;place-items:center;font-family:"Manrope",sans-serif;font-weight:800;font-size:1.5rem;flex-shrink:0}
+  .ship-item strong{font-family:"Barlow Condensed",sans-serif;font-size:1.12rem;font-weight:600;text-transform:uppercase;letter-spacing:.02em;display:block;margin-bottom:6px;color:var(--main-dark)}
+  .ship-item p{font-family:"Manrope",sans-serif;font-size:.9rem;color:var(--muted);line-height:1.5}
+  @media(max-width:900px){.ship .wrap{grid-template-columns:repeat(2,1fr)}}
+
+  /* ============ ESPERIENZE ============ */
+  .exp{padding:120px 0;background:var(--cream)}
+  .exp-head{text-align:center;max-width:800px;margin:0 auto 60px}
+  .exp-head .eyebrow{display:inline-block;margin-bottom:22px}
+  .exp-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .exp-card{position:relative;height:500px;overflow:hidden;color:var(--cream);display:flex;flex-direction:column;justify-content:flex-end;padding:34px;background:linear-gradient(180deg,rgba(61,26,38,0) 30%,rgba(61,26,38,.94) 100%),linear-gradient(160deg,#7a3a4f,#3d1a26)}
+  .exp-card::after{content:"FOTO DEGUSTAZIONE";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);font-family:"Barlow Condensed",sans-serif;font-size:.8rem;letter-spacing:.18em;color:rgba(251,249,237,.35);z-index:0;font-weight:500}
+  .exp-card > *{position:relative;z-index:1}
+  .exp-eyebrow{font-family:"Barlow Condensed",sans-serif;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:#d4c97a;margin-bottom:14px;font-weight:600}
+  .exp-card h3{color:var(--cream);font-size:1.85rem;margin-bottom:14px;line-height:1.1}
+  .exp-card p{font-family:"Manrope",sans-serif;font-size:.95rem;color:rgba(251,249,237,.78);margin-bottom:22px;line-height:1.55}
+  .exp-card .price{font-family:"Barlow Condensed",sans-serif;font-size:.92rem;letter-spacing:.14em;text-transform:uppercase;color:#d4c97a;margin-bottom:18px;font-weight:600}
+  .exp-card .btn-mini{display:inline-flex;align-items:center;gap:9px;font-family:"Barlow Condensed",sans-serif;font-size:.92rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;border-bottom:2px solid var(--cream);padding-bottom:5px;align-self:flex-start}
+  @media(max-width:1000px){.exp-grid{grid-template-columns:1fr}}
+
+  /* ============ RECENSIONI ============ */
+  .rev{padding:54px 0;background:var(--paper);border-bottom:1px solid var(--line)}
+  .rev-head{display:flex;justify-content:space-between;align-items:center;gap:40px;margin-bottom:32px;flex-wrap:wrap}
+  .rev-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .rev-head h2{font-size:1.5rem;letter-spacing:.02em;max-width:520px}
+  .rev-head .eyebrow{margin-bottom:8px;display:inline-block;font-size:.78rem}
+  .rev-score{display:flex;align-items:center;gap:16px}
+  .rev-score-num{font-family:"Manrope",sans-serif;font-size:2.6rem;font-weight:800;line-height:1;color:var(--accent);letter-spacing:-.02em}
+  .rev-score-meta .stars{color:var(--accent);font-size:.94rem;letter-spacing:.05em;margin-bottom:3px}
+  .rev-score-meta strong{display:block;font-family:"Barlow Condensed",sans-serif;font-size:.84rem;color:var(--main-dark);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .rev-score-meta span{display:none}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .rev-card{background:var(--cream);border:1px solid var(--line);padding:20px 22px;display:flex;flex-direction:column}
+  .rev-stars{color:var(--accent);font-size:.9rem;letter-spacing:.04em;margin-bottom:10px}
+  .rev-text{font-family:"Manrope",sans-serif;font-size:.86rem;color:var(--ink);line-height:1.55;margin-bottom:14px;flex:1;font-weight:400}
+  .rev-meta{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--line)}
+  .rev-avatar{width:32px;height:32px;background:var(--main);display:grid;place-items:center;font-family:"Manrope",sans-serif;font-weight:700;color:var(--cream);font-size:.82rem}
+  .rev-name{font-family:"Manrope",sans-serif;font-weight:700;color:var(--main-dark);font-size:.84rem;line-height:1.2}
+  .rev-date{font-family:"Barlow Condensed",sans-serif;font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-top:1px}
+  @media(max-width:1000px){.rev-grid{grid-template-columns:1fr}.rev-head{grid-template-columns:1fr}.rev-score{justify-self:start}}
+
+  /* ============ STORIE / EDITORIAL ============ */
+  .storie{padding:120px 0;background:var(--paper)}
+  .storie-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:54px;gap:40px;flex-wrap:wrap}
+  .storie-head h2{max-width:600px}
+  .storie-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .storie-head .vedi{font-family:"Barlow Condensed",sans-serif;font-size:.96rem;letter-spacing:.16em;text-transform:uppercase;color:var(--main);font-weight:600;display:inline-flex;align-items:center;gap:10px;border-bottom:2px solid var(--main);padding-bottom:6px}
+  .storie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .storia-card{background:var(--cream);overflow:hidden;transition:transform .3s;border:1px solid var(--line)}
+  .storia-card:hover{transform:translateY(-5px)}
+  .storia-img{height:240px;background:linear-gradient(160deg,#7a3a4f,#3d1a26);display:grid;place-items:center;position:relative}
+  .storia-img::after{content:"FOTO ARTICOLO";font-family:"Barlow Condensed",sans-serif;font-size:.76rem;letter-spacing:.18em;color:rgba(251,249,237,.4);font-weight:500}
+  .storia-cat{position:absolute;top:14px;left:14px;background:var(--cream);color:var(--accent);font-family:"Barlow Condensed",sans-serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;font-weight:600;z-index:1}
+  .storia-info{padding:28px}
+  .storia-date{font-family:"Barlow Condensed",sans-serif;font-size:.8rem;letter-spacing:.14em;color:var(--muted);margin-bottom:12px;text-transform:uppercase;font-weight:500}
+  .storia-info h3{font-size:1.45rem;line-height:1.15;margin-bottom:14px}
+  .storia-info p{font-family:"Manrope",sans-serif;font-size:.94rem;color:var(--muted);line-height:1.55;margin-bottom:20px}
+  .storia-link{font-family:"Barlow Condensed",sans-serif;font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:2px solid var(--accent);padding-bottom:4px}
+  @media(max-width:1000px){.storie-grid{grid-template-columns:1fr}}
+
+  /* ============ NEWSLETTER ============ */
+  .news{padding:120px 0;background:var(--accent);color:var(--cream);position:relative;overflow:hidden}
+  .news::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 80% at 90% 50%, rgba(61,26,38,.4), transparent 65%)}
+  .news .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center}
+  .news-copy .eyebrow{color:#d4c97a;margin-bottom:24px;display:inline-block}
+  .news-copy h2{color:var(--cream);margin-bottom:24px}
+  .news-copy h2 em{font-style:italic;font-weight:400;color:#d4c97a;text-transform:lowercase}
+  .news-copy p{font-family:"Manrope",sans-serif;font-size:1.08rem;color:rgba(251,249,237,.88);margin-bottom:30px;max-width:480px;line-height:1.65}
+  .news-perks{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:26px}
+  .news-perks li{display:flex;align-items:center;gap:16px;font-family:"Manrope",sans-serif;font-size:.98rem;color:rgba(251,249,237,.9)}
+  .news-perks li::before{content:"";width:28px;height:1px;background:#d4c97a;flex-shrink:0}
+  .news-form{background:var(--cream);color:var(--main-dark);padding:42px;box-shadow:0 30px 60px -25px rgba(0,0,0,.45)}
+  .news-form-eyebrow{font-family:"Barlow Condensed",sans-serif;font-size:.86rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+  .news-form h3{font-size:2rem;margin-bottom:10px;font-family:"Manrope",sans-serif;font-weight:800;text-transform:none;letter-spacing:-.02em;color:var(--main-dark)}
+  .news-form > p{font-family:"Manrope",sans-serif;font-size:.94rem;color:var(--muted);margin-bottom:30px}
+  .news-form label{display:block;font-family:"Barlow Condensed",sans-serif;font-size:.78rem;letter-spacing:.18em;color:var(--main-dark);text-transform:uppercase;margin-bottom:9px;font-weight:600}
+  .news-form input[type=email]{width:100%;padding:15px 18px;border:1.5px solid var(--line);font-family:"Manrope",sans-serif;font-size:1rem;background:var(--paper);color:var(--main-dark);margin-bottom:20px}
+  .news-form input:focus{outline:none;border-color:var(--accent)}
+  .news-form .privacy{display:flex;align-items:flex-start;gap:11px;font-size:.82rem;color:var(--muted);margin-bottom:26px;line-height:1.5}
+  .news-form .privacy input{margin:4px 0 0;flex-shrink:0}
+  .news-form .privacy label{font-family:"Manrope",sans-serif;font-size:.84rem;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400;margin:0;line-height:1.5}
+  .news-form button{width:100%;background:var(--main);color:var(--cream);padding:17px;font-family:"Barlow Condensed",sans-serif;font-size:1.02rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:background .2s}
+  .news-form button:hover{background:var(--main-hover)}
+
+  /* ============ FAQ ============ */
+  .faq{padding:120px 0;background:var(--cream)}
+  .faq .wrap{max-width:900px}
+  .faq-head{text-align:center;margin-bottom:60px}
+  .faq-head .eyebrow{display:inline-block;margin-bottom:20px}
+  .faq-head h2 em{font-style:italic;font-weight:400;color:var(--accent);text-transform:lowercase}
+  .faq-list{display:flex;flex-direction:column;gap:16px}
+  .faq-item{background:var(--paper);padding:30px 34px;border:1px solid var(--line);transition:all .2s}
+  .faq-item:hover{border-color:var(--main)}
+  .faq-q{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;font-family:"Barlow Condensed",sans-serif;font-size:1.28rem;font-weight:600;text-transform:uppercase;letter-spacing:.02em;color:var(--main-dark);line-height:1.25}
+  .faq-q .plus{font-family:"Manrope",sans-serif;font-size:1.7rem;font-weight:300;color:var(--accent);flex-shrink:0;line-height:1}
+  .faq-a{font-family:"Manrope",sans-serif;font-size:.98rem;color:var(--ink);line-height:1.65;margin-top:16px;padding-right:44px}
+  .faq-foot{text-align:center;margin-top:54px;font-family:"Manrope",sans-serif;font-size:.98rem;color:var(--muted)}
+  .faq-foot a{color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent);padding-bottom:2px}
+
+  /* ============ FOOTER ============ */
+  .footer{background:var(--main-dark);color:var(--cream);padding:100px 0 32px}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:50px;margin-bottom:64px;padding-bottom:52px;border-bottom:1px solid rgba(251,249,237,.12)}
+  .footer-brand img{height:80px;width:auto;margin-bottom:24px;filter:brightness(0) invert(1) opacity(.95)}
+  .footer-brand p{font-family:"Manrope",sans-serif;font-size:.92rem;color:rgba(251,249,237,.65);line-height:1.65;margin-bottom:26px;max-width:340px}
+  .footer-social{display:flex;gap:10px}
+  .footer-social a{width:40px;height:40px;border:1px solid rgba(251,249,237,.2);display:grid;place-items:center;font-family:"Barlow Condensed",sans-serif;font-size:.84rem;font-weight:600;letter-spacing:.06em;transition:all .2s}
+  .footer-social a:hover{background:#d4c97a;color:var(--main-dark);border-color:#d4c97a}
+  .footer-col h4{color:var(--cream);font-size:1rem;margin-bottom:20px;font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.16em}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .footer-col li{font-family:"Manrope",sans-serif;font-size:.92rem;color:rgba(251,249,237,.65)}
+  .footer-col a:hover{color:#d4c97a}
+  .footer-col p{font-family:"Manrope",sans-serif;font-size:.92rem;color:rgba(251,249,237,.65);line-height:1.65}
+  .footer-col strong{color:var(--cream);font-family:"Barlow Condensed",sans-serif;font-weight:600;display:block;margin-bottom:6px;font-size:.84rem;letter-spacing:.14em;text-transform:uppercase;margin-top:14px}
+  .footer-col strong:first-child{margin-top:0}
+  .footer-bottom{display:flex;justify-content:space-between;font-family:"Barlow Condensed",sans-serif;font-size:.8rem;letter-spacing:.14em;color:rgba(251,249,237,.45);text-transform:uppercase;font-weight:500}
+  @media(max-width:1000px){.footer-top{grid-template-columns:1fr 1fr;gap:40px}}
+
+  /* ============ WHATSAPP FAB ============ */
+  .wa-fab{
+    position:fixed;bottom:28px;right:28px;z-index:300;
+    background:#25d366;color:#0a1810;padding:17px 24px;
+    font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:.16em;
+    display:flex;align-items:center;gap:11px;
+    box-shadow:0 20px 40px -10px rgba(37,211,102,.5);transition:transform .2s
+  }
+  .wa-fab:hover{transform:scale(1.05)}
+  .wa-fab::before{content:"";width:11px;height:11px;border-radius:50%;background:#0a1810;box-shadow:0 0 0 3px rgba(10,24,16,.2)}
+
+  @media(max-width:980px){
+    .hero .wrap,.chi .wrap,.pers .wrap,.news .wrap{grid-template-columns:1fr;gap:50px}
+    .hero-visual,.chi-visual{height:440px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">
+  Spedizione gratuita oltre <span>100 €</span> in tutta Italia<span class="sep">•</span>Consegna in giornata nei comuni limitrofi a Locorotondo<span class="sep">•</span><span>600+</span> etichette selezionate
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="wrap">
+    <a href="/" class="brand"><img src="vinifera-logo.png" alt="Vinifera Enoteca"></a>
+    <nav class="topnav">
+      <div class="nav-item has-mega">
+        <a href="#">Rossi</a>
+        <div class="mega">
+          <div class="wrap">
+            <div class="mega-grid">
+              <div class="mega-col">
+                <span class="mega-title">Regione</span>
+                <a href="#">Sicilia <span class="mega-badge">Trend</span></a>
+                <a href="#">Puglia <span class="mega-badge">Trend</span></a>
+                <a href="#">Campania <span class="mega-badge">Trend</span></a>
+                <a href="#">Sardegna <span class="mega-badge">Trend</span></a>
+                <a href="#">Veneto</a>
+                <a href="#">Piemonte</a>
+                <a href="#">Toscana</a>
+                <a href="#">Trentino Alto Adige</a>
+                <a href="#">Emilia Romagna</a>
+                <a href="#">Lombardia</a>
+                <a href="#">Friuli Venezia Giulia</a>
+                <a href="#">Abruzzo</a>
+                <a href="#">Valle d'Aosta</a>
+                <a href="#">Marche</a>
+                <a href="#">Lazio</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Tipologia</span>
+                <a href="#">Valpolicella</a>
+                <a href="#">Nebbiolo</a>
+                <a href="#">Brunello</a>
+                <a href="#">Amarone</a>
+                <a href="#">Barolo</a>
+                <a href="#">Bolgheri</a>
+                <a href="#">Chianti Classico</a>
+                <a href="#">Barbera</a>
+                <a href="#">Lagrein</a>
+                <a href="#">Sangiovese</a>
+                <a href="#">Primitivo</a>
+                <a href="#">Supertuscan</a>
+                <a href="#">Montepulciano</a>
+                <a href="#">Barbaresco</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Abbinamento</span>
+                <a href="#">Carni bianche</a>
+                <a href="#">Vini da grigliata</a>
+                <a href="#">Carni rosse</a>
+                <a href="#">Formaggi</a>
+                <a href="#">Salumi</a>
+                <a href="#">Vini da dessert</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <a href="#">Bianchi</a>
+        <div class="mega">
+          <div class="wrap">
+            <div class="mega-grid">
+              <div class="mega-col">
+                <span class="mega-title">Regione</span>
+                <a href="#">Sicilia <span class="mega-badge">Trend</span></a>
+                <a href="#">Puglia <span class="mega-badge">Trend</span></a>
+                <a href="#">Campania <span class="mega-badge">Trend</span></a>
+                <a href="#">Friuli Venezia Giulia <span class="mega-badge">Trend</span></a>
+                <a href="#">Trentino Alto Adige</a>
+                <a href="#">Veneto</a>
+                <a href="#">Piemonte</a>
+                <a href="#">Toscana</a>
+                <a href="#">Marche</a>
+                <a href="#">Abruzzo</a>
+                <a href="#">Lombardia</a>
+                <a href="#">Sardegna</a>
+                <a href="#">Lazio</a>
+                <a href="#">Valle d'Aosta</a>
+                <a href="#">Emilia Romagna</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Tipologia</span>
+                <a href="#">Vermentino</a>
+                <a href="#">Fiano</a>
+                <a href="#">Greco di Tufo</a>
+                <a href="#">Falanghina</a>
+                <a href="#">Chardonnay</a>
+                <a href="#">Sauvignon</a>
+                <a href="#">Verdicchio</a>
+                <a href="#">Gavi</a>
+                <a href="#">Soave</a>
+                <a href="#">Friulano</a>
+                <a href="#">Pecorino</a>
+                <a href="#">Ribolla Gialla</a>
+                <a href="#">Grillo</a>
+                <a href="#">Trebbiano</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Abbinamento</span>
+                <a href="#">Antipasti di mare</a>
+                <a href="#">Pesce</a>
+                <a href="#">Carni bianche</a>
+                <a href="#">Formaggi freschi</a>
+                <a href="#">Aperitivo</a>
+                <a href="#">Vini da dessert</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <a href="#">Spumanti</a>
+        <div class="mega">
+          <div class="wrap">
+            <div class="mega-grid">
+              <div class="mega-col">
+                <span class="mega-title">Regione</span>
+                <a href="#">Lombardia <span class="mega-badge">Trend</span></a>
+                <a href="#">Trentino Alto Adige <span class="mega-badge">Trend</span></a>
+                <a href="#">Veneto <span class="mega-badge">Trend</span></a>
+                <a href="#">Champagne <span class="mega-badge">Trend</span></a>
+                <a href="#">Piemonte</a>
+                <a href="#">Emilia Romagna</a>
+                <a href="#">Puglia</a>
+                <a href="#">Sicilia</a>
+                <a href="#">Friuli Venezia Giulia</a>
+                <a href="#">Abruzzo</a>
+                <a href="#">Marche</a>
+                <a href="#">Sardegna</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Tipologia</span>
+                <a href="#">Franciacorta</a>
+                <a href="#">Trento DOC</a>
+                <a href="#">Prosecco</a>
+                <a href="#">Champagne</a>
+                <a href="#">Metodo Classico</a>
+                <a href="#">Lambrusco</a>
+                <a href="#">Asti Spumante</a>
+                <a href="#">Pas Dosé</a>
+                <a href="#">Blanc de Blancs</a>
+                <a href="#">Spumante Rosé</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Abbinamento</span>
+                <a href="#">Aperitivo</a>
+                <a href="#">Antipasti di mare</a>
+                <a href="#">Fritti</a>
+                <a href="#">Pesce</a>
+                <a href="#">Brindisi e regalo</a>
+                <a href="#">Vini da dessert</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item has-mega">
+        <a href="#">Rosati</a>
+        <div class="mega">
+          <div class="wrap">
+            <div class="mega-grid">
+              <div class="mega-col">
+                <span class="mega-title">Regione</span>
+                <a href="#">Puglia <span class="mega-badge">Trend</span></a>
+                <a href="#">Abruzzo <span class="mega-badge">Trend</span></a>
+                <a href="#">Sicilia <span class="mega-badge">Trend</span></a>
+                <a href="#">Calabria <span class="mega-badge">Trend</span></a>
+                <a href="#">Veneto</a>
+                <a href="#">Toscana</a>
+                <a href="#">Campania</a>
+                <a href="#">Provenza</a>
+                <a href="#">Lombardia</a>
+                <a href="#">Sardegna</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Tipologia</span>
+                <a href="#">Cerasuolo d'Abruzzo</a>
+                <a href="#">Bardolino Chiaretto</a>
+                <a href="#">Negroamaro Rosato</a>
+                <a href="#">Salento Rosato</a>
+                <a href="#">Provenza</a>
+                <a href="#">Etna Rosato</a>
+                <a href="#">Cirò Rosato</a>
+                <a href="#">Bombino Nero</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+              <div class="mega-col">
+                <span class="mega-title">Abbinamento</span>
+                <a href="#">Aperitivo</a>
+                <a href="#">Pizza</a>
+                <a href="#">Carni bianche</a>
+                <a href="#">Pesce</a>
+                <a href="#">Salumi</a>
+                <a href="#">Formaggi freschi</a>
+                <a href="#" class="mega-all">Vedi tutti</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#">Km 0</a>
+      <a href="#">Food locale</a>
+      <a href="#">Chi siamo</a>
+      <a href="#">Contattaci</a>
+    </nav>
+    <div class="topactions">
+      <button class="icobtn" aria-label="Cerca">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      </button>
+      <button class="icobtn" aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      </button>
+      <button class="icobtn" aria-label="Carrello">
+        <svg viewBox="0 0 24 24"><path d="M6 7h12l-1.2 10a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-count">0</span>
+      </button>
+      <a href="#" class="wa">Parla con Stefano</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-pill">Benvenuto nello shop online</span>
+      <span class="eyebrow">Enoteca a Locorotondo, dal 2020 · Spedizioni in tutta Italia</span>
+      <h1>600 etichette scelte da chi il vino lo <em>serve ogni giorno</em></h1>
+      <p class="hero-lede">Allo stesso prezzo dei grandi e-commerce nazionali, con un sommelier vero dall'altra parte di un messaggio. Il vino lo raccontiamo qui come facciamo con i clienti al bancone.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary">Esplora la selezione <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-secondary">Parla con il sommelier</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>4,9 / 5</strong><span>387 recensioni Google</span></div>
+        <div><strong>600+</strong><span>etichette in catalogo</span></div>
+        <div><strong>120+</strong><span>produttori selezionati</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img hero-img-main"></div>
+      <div class="hero-tape">
+        <span class="num">10%</span>
+        <p>di sconto sul primo ordine se ti iscrivi alla newsletter</p>
+      </div>
+      <div class="hero-img hero-img-floater"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trustbar">
+  <div class="wrap">
+    <div class="trust-item">
+      <div class="trust-icon">★</div>
+      <div><strong>4,9 / 5</strong><span>387 recensioni Google</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">V</div>
+      <div><strong>Dal 2020</strong><span>Centro storico Locorotondo</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">⊕</div>
+      <div><strong>600+ etichette</strong><span>Da tutta Italia, food artigianale</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">↗</div>
+      <div><strong>Spedizione gratuita</strong><span>Oltre 100 € in tutta Italia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENSIONI -->
+<section class="rev">
+  <div class="wrap">
+    <div class="rev-head">
+      <div>
+        <span class="eyebrow">Cosa dicono di noi</span>
+        <h2>387 recensioni reali, scritte da chi <em>ci è stato davvero</em></h2>
+      </div>
+      <div class="rev-score">
+        <div class="rev-score-num">4,9</div>
+        <div class="rev-score-meta">
+          <div class="stars">★★★★★</div>
+          <strong>su 387 recensioni Google</strong>
+          <span>Aggiornate al 28.05.2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="rev-grid">
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">"Posto piccolissimo nascosto in un vicolo del centro storico, dentro una selezione che non ti aspetti. Stefano mi ha consigliato un vino della Valle d'Itria che non avevo mai sentito e l'abbiamo finito in una serata. Tornerò."</div>
+        <div class="rev-meta">
+          <div class="rev-avatar">G</div>
+          <div>
+            <div class="rev-name">Giulia Marrese</div>
+            <div class="rev-date">Locale · 2 mesi fa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">"Compriamo da loro da quasi due anni online, mai un problema. Le bottiglie arrivano sempre intatte, ben imballate. L'unica enoteca dove ho trovato vini friulani in Puglia. Prezzi onesti, niente sovrapprezzi mascherati."</div>
+        <div class="rev-meta">
+          <div class="rev-avatar">M</div>
+          <div>
+            <div class="rev-name">Marco Petruzzelli</div>
+            <div class="rev-date">Bari · 4 mesi fa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">"Ho scritto a Stefano su WhatsApp di domenica sera per chiedere un vino per il pranzo del giorno dopo. Mi ha risposto in venti minuti, mi ha consigliato una bottiglia da 18 euro che ha spaccato. Per come funzionano oggi i siti di vino, questa cosa qui è oro."</div>
+        <div class="rev-meta">
+          <div class="rev-avatar">A</div>
+          <div>
+            <div class="rev-name">Alessandra Conte</div>
+            <div class="rev-date">Milano · 3 settimane fa</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SELEZIONE DEL MOMENTO (spostata prima del catalogo per dare priorità ai prodotti) -->
+<section class="selez selez-top">
+  <div class="wrap">
+    <div class="selez-head">
+      <div>
+        <span class="eyebrow">Selezione di questa settimana</span>
+        <h2>Le bottiglie che stiamo <em>sbicchierando in enoteca</em> in questi giorni</h2>
+      </div>
+      <a href="#" class="vedi">Vedi tutto il catalogo →</a>
+    </div>
+    <div class="selez-grid">
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge">Scelta di Stefano</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Toscana · Bolgheri</div>
+          <div class="wine-name">Le Difese 2022</div>
+          <div class="wine-producer">Tenuta San Guido</div>
+          <div class="wine-quote">Il Sassicaia è un sogno, Le Difese è la sua versione quotidiana. Sangiovese e Cabernet che fanno il loro mestiere. Perfetto su una bistecca alla brace.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€27,30</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge">Casa nostra</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Puglia · Valle d'Itria</div>
+          <div class="wine-name">Verdeca 2023</div>
+          <div class="wine-producer">Cantine Coppi</div>
+          <div class="wine-quote">È il bianco che mettiamo in tavola d'estate, quando si mangia fuori. Sa di mandorla amara e di erba tagliata. Costa poco, beve come una bottiglia da 25 euro.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€9,80</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge">Etichetta da regalo</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Piemonte · Langhe</div>
+          <div class="wine-name">Barolo Bussia 2020</div>
+          <div class="wine-producer">Prunotto</div>
+          <div class="wine-quote">Quando vuoi fare bella figura senza prendere fischi per fiaschi. Il Bussia è il cru più rotondo di Prunotto, già pronto da bere ora ma con vent'anni davanti.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€78,60</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge">Nicchia vera</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Friuli · Colli Orientali</div>
+          <div class="wine-name">Pignolo 2011</div>
+          <div class="wine-producer">Colutta</div>
+          <div class="wine-quote">Il vitigno più ostinato del Friuli, e questa è una delle dieci cantine in Italia che lo lavora seriamente. Se ti piacciono i rossi austeri, non c'è altro da leggere.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€46,00</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ESPLORA IL CATALOGO -->
+<section class="cat">
+  <div class="wrap">
+    <div class="cat-head">
+      <span class="eyebrow">Esplora il catalogo</span>
+      <h2>Da dove vuoi <em>cominciare</em>?</h2>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card cat-red">
+        <div class="cat-img"></div>
+        <div class="cat-info">
+          <strong>Rossi</strong>
+          <span>312 etichette · da €8,90</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card cat-white">
+        <div class="cat-img"></div>
+        <div class="cat-info">
+          <strong>Bianchi</strong>
+          <span>168 etichette · da €7,50</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card cat-bub">
+        <div class="cat-img"></div>
+        <div class="cat-info">
+          <strong>Bollicine</strong>
+          <span>74 etichette · da €11,00</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card cat-pug">
+        <div class="cat-img"></div>
+        <div class="cat-info">
+          <strong>Vini pugliesi</strong>
+          <span>132 etichette · selezione casa</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card cat-box">
+        <div class="cat-img"></div>
+        <div class="cat-info">
+          <strong>Wine box e regali</strong>
+          <span>14 selezioni curate · da €34</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card cat-food">
+        <div class="cat-img"></div>
+        <div class="cat-info">
+          <strong>Food artigianale</strong>
+          <span>Confetture, oli, conserve</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL SOMMELIER -->
+<section class="pers">
+  <div class="wrap">
+    <div class="pers-copy">
+      <span class="eyebrow">Personal Sommelier su WhatsApp</span>
+      <h2>Non sai quale vino scegliere? <em>Scrivici e basta</em></h2>
+      <p>Stefano risponde personalmente, di solito entro un'ora. Ti diciamo che vino abbinare alla cena di stasera, quale bottiglia regalare al tuo capo, come svuotare la cantina di tuo zio in modo intelligente. Senza appuntamento, senza costi, senza obblighi di acquisto.</p>
+      <div class="pers-cta">
+        <a href="#" class="btn-wa">Apri WhatsApp <span>→</span></a>
+        <a href="#" class="btn-outline">Chiama in enoteca</a>
+      </div>
+      <div class="pers-meta">
+        <div><strong>~ 47 min</strong><span>Tempo medio di risposta</span></div>
+        <div><strong>Gratis</strong><span>Nessun obbligo di acquisto</span></div>
+        <div><strong>7/7</strong><span>Lun-Dom, 10-22</span></div>
+      </div>
+    </div>
+    <div class="pers-chat">
+      <div class="pers-chat-head">
+        <div class="pers-chat-avatar">S</div>
+        <div>
+          <div class="pers-chat-name">Stefano · Vinifera</div>
+          <div class="pers-chat-status">Online ora</div>
+        </div>
+      </div>
+      <div class="msg msg-you">Ciao Stefano, devo regalare una bottiglia per il 50esimo di mio padre. Lui beve sempre Brunello. Budget 60-80 euro. Cosa mi consigli?</div>
+      <div class="msg-time">14:22</div>
+      <div class="msg msg-me">Ciao! Se beve Brunello e vuoi sorprenderlo, prova il Vino Nobile di Montepulciano di Boscarelli, riserva 2018. Stessa zona, stesso vitigno, ma più elegante e meno scontato. Lo abbiamo a 64 euro, te lo spedisco oggi.</div>
+      <div class="msg-time">14:24</div>
+      <div class="msg msg-you">Perfetto. Prendo. Ti mando l'ordine ora.</div>
+      <div class="msg-time">14:26</div>
+    </div>
+  </div>
+</section>
+
+<!-- VINI PUGLIESI PIÙ AMATI -->
+<section class="selez selez-pug">
+  <div class="wrap">
+    <div class="selez-head">
+      <div>
+        <span class="eyebrow olive">Casa nostra · Top vendite Puglia</span>
+        <h2>I vini pugliesi <em>più amati</em> dai nostri clienti</h2>
+      </div>
+      <a href="#" class="vedi">Vedi tutta la selezione pugliese →</a>
+    </div>
+    <div class="selez-grid">
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge badge-olive">#1 più ordinato</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Puglia · Manduria</div>
+          <div class="wine-name">Primitivo Sessantanni 2021</div>
+          <div class="wine-producer">Cantine San Marzano</div>
+          <div class="wine-quote">Il Primitivo più conosciuto del Salento, da viti di sessant'anni. Pieno, caldo, con quel ritorno di amarena cotta che lo rende inconfondibile. Lo vendiamo da quando abbiamo aperto.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€18,90</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge badge-olive">Bestseller</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Puglia · Salento</div>
+          <div class="wine-name">Salice Salentino Riserva 2020</div>
+          <div class="wine-producer">Leone De Castris</div>
+          <div class="wine-quote">Negroamaro e Malvasia Nera in purezza pugliese. Una delle cantine più storiche del Salento, e questa è la loro etichetta di riferimento. Su carne alla griglia non sbaglia mai.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€12,40</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge badge-olive">Da provare</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Puglia · Brindisi</div>
+          <div class="wine-name">Susumaniello Oltreme 2023</div>
+          <div class="wine-producer">Tenute Rubino</div>
+          <div class="wine-quote">Vitigno autoctono che fino a vent'anni fa nessuno conosceva. Tenute Rubino l'ha riportato in vita. Rosso fresco, agrumato, beve fresco. Lo consigliamo a chi pensa che la Puglia faccia solo vini "potenti".</div>
+          <div class="wine-foot">
+            <div class="wine-price">€14,80</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wine-card">
+        <div class="wine-img"><span class="badge badge-olive">Etichetta da regalo</span></div>
+        <div class="wine-info">
+          <div class="wine-region">Puglia · Manduria</div>
+          <div class="wine-name">Es 2021</div>
+          <div class="wine-producer">Gianfranco Fino</div>
+          <div class="wine-quote">Il Primitivo che ha spostato l'asticella della Puglia nel mondo. Gianfranco Fino lavora come pochi. Quando un cliente cerca un rosso pugliese importante da regalare, mandiamo questo.</div>
+          <div class="wine-foot">
+            <div class="wine-price">€68,00</div>
+            <a href="#" class="wine-add">Aggiungi →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONFRONTO PREZZI -->
+<section class="compare">
+  <div class="wrap">
+    <div class="compare-head">
+      <span class="eyebrow">Trasparenza prezzi</span>
+      <h2>Costiamo come i grandi e-commerce. <em>Spesso anche meno</em></h2>
+      <p>"Vinifera è cara" è il pregiudizio più comune, e non è vero. I nostri prezzi sono in linea con i grandi e-commerce di vino online, e nella maggior parte dei casi siamo più bassi. Qualche esempio verificato oggi su tre etichette di riferimento.</p>
+    </div>
+    <div class="compare-table">
+      <div class="compare-row compare-head-row">
+        <span>Etichetta</span>
+        <span class="col-vinifera">Vinifera</span>
+        <span>Media altri shop online</span>
+        <span>Differenza</span>
+      </div>
+      <div class="compare-row">
+        <div class="compare-bottle">
+          <div class="compare-bottle-img"></div>
+          <div><strong>Le Difese 2022</strong><small>Tenuta San Guido · Toscana</small></div>
+        </div>
+        <div class="compare-price win">€27,30</div>
+        <div class="compare-price">€29,20</div>
+        <div class="compare-diff">−€1,90</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-bottle">
+          <div class="compare-bottle-img"></div>
+          <div><strong>Barolo Bussia 2020</strong><small>Prunotto · Piemonte</small></div>
+        </div>
+        <div class="compare-price win">€78,60</div>
+        <div class="compare-price">€83,45</div>
+        <div class="compare-diff">−€4,85</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-bottle">
+          <div class="compare-bottle-img"></div>
+          <div><strong>Tignanello 2021</strong><small>Antinori · Toscana</small></div>
+        </div>
+        <div class="compare-price win">€132,00</div>
+        <div class="compare-price">€136,50</div>
+        <div class="compare-diff">−€4,50</div>
+      </div>
+    </div>
+    <p class="compare-foot">Prezzi verificati il 28 maggio 2026 sui principali e-commerce nazionali. Aggiornati ogni settimana.</p>
+  </div>
+</section>
+
+<!-- SPEDIZIONI -->
+<section class="ship">
+  <div class="wrap">
+    <div class="ship-item">
+      <div class="ship-icon">↗</div>
+      <div><strong>Spedizione gratuita</strong><p>Oltre 100€ in tutta Italia, corriere espresso 24/48h</p></div>
+    </div>
+    <div class="ship-item">
+      <div class="ship-icon">⌂</div>
+      <div><strong>Consegna in giornata</strong><p>Nei comuni limitrofi a Locorotondo, ordini entro le 17</p></div>
+    </div>
+    <div class="ship-item">
+      <div class="ship-icon">⛨</div>
+      <div><strong>Pacco anti-rottura</strong><p>Imballaggio rinforzato, bottiglia rotta sostituita</p></div>
+    </div>
+    <div class="ship-item">
+      <div class="ship-icon">↺</div>
+      <div><strong>Reso senza domande</strong><p>14 giorni per cambiare idea, anche se non è di tuo gusto</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPERIENZE IN ENOTECA -->
+<section class="exp">
+  <div class="wrap">
+    <div class="exp-head">
+      <span class="eyebrow">Esperienze in enoteca</span>
+      <h2>Se sei dalle nostre parti, <em>passa a bere un calice</em></h2>
+    </div>
+    <div class="exp-grid">
+
+      <div class="exp-card">
+        <div class="exp-eyebrow">Degustazione guidata</div>
+        <h3>Bianchi della Valle d'Itria</h3>
+        <p>Quattro calici, quattro produttori a venti minuti da qui. Verdeca, Bianco d'Alessano, Minutolo e un outsider. Con un tagliere di formaggi locali.</p>
+        <div class="price">€28 a persona · 90 min</div>
+        <a href="#" class="btn-mini">Prenota un tavolo →</a>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-eyebrow">Verticale</div>
+        <h3>Primitivo, cinque annate</h3>
+        <p>Stesso vitigno, stesso produttore, cinque annate diverse. Per capire come cambia un vino nel tempo, e perché ne vale la pena. Con Stefano al banco.</p>
+        <div class="price">€42 a persona · 2 ore</div>
+        <a href="#" class="btn-mini">Prenota un tavolo →</a>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-eyebrow">Aperitivo</div>
+        <h3>Calice e tagliere</h3>
+        <p>Senza prenotazione. Entri, scegli il vino al banco, ti facciamo un tagliere con quello che abbiamo selezionato questa settimana. Aperto fino a mezzanotte.</p>
+        <div class="price">€12 a persona · senza limite</div>
+        <a href="#" class="btn-mini">Vieni a trovarci →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STORIE DAL VICOLO -->
+<section class="storie">
+  <div class="wrap">
+    <div class="storie-head">
+      <div>
+        <span class="eyebrow">Storie dal vicolo</span>
+        <h2>Il vino raccontato come <em>se fossi al bancone</em> con noi</h2>
+      </div>
+      <a href="#" class="vedi">Tutti gli articoli →</a>
+    </div>
+    <div class="storie-grid">
+
+      <div class="storia-card">
+        <div class="storia-img"><span class="storia-cat">Vino del mese</span></div>
+        <div class="storia-info">
+          <div class="storia-date">22 maggio 2026</div>
+          <h3>Perché tutti dovrebbero bere almeno una volta una Verdeca</h3>
+          <p>È il bianco autoctono della Valle d'Itria. Costa poco, lo trattano in pochi, e quando è fatto bene è una delle cose più buone che puoi mettere in tavola d'estate.</p>
+          <a href="#" class="storia-link">Continua a leggere →</a>
+        </div>
+      </div>
+
+      <div class="storia-card">
+        <div class="storia-img"><span class="storia-cat">Cantina del mese</span></div>
+        <div class="storia-info">
+          <div class="storia-date">14 maggio 2026</div>
+          <h3>Coppi, settant'anni a Turi senza fare rumore</h3>
+          <p>Una delle cantine più antiche della Puglia, gestita ancora dalla stessa famiglia. Vini schietti, niente esercizi di stile. Siamo andati a trovarli per raccontarli.</p>
+          <a href="#" class="storia-link">Continua a leggere →</a>
+        </div>
+      </div>
+
+      <div class="storia-card">
+        <div class="storia-img"><span class="storia-cat">Dietro le quinte</span></div>
+        <div class="storia-info">
+          <div class="storia-date">06 maggio 2026</div>
+          <h3>Una serata in enoteca, raccontata da Maria Teresa</h3>
+          <p>Cinque tavoli, tre lingue diverse, una bottiglia di Pignolo che ci ha tenuti svegli fino a mezzanotte. Le serate da Vinifera sembrano tutte uguali, e invece nessuna lo è.</p>
+          <a href="#" class="storia-link">Continua a leggere →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="news">
+  <div class="wrap">
+    <div class="news-copy">
+      <span class="eyebrow">La newsletter di Vinifera</span>
+      <h2>Una mail ogni due settimane. <em>Solo cose buone, promesso</em></h2>
+      <p>Ti raccontiamo le bottiglie che stiamo aprendo, i produttori che siamo andati a trovare, le serate in enoteca, le promozioni in anteprima. Niente spam, niente venditerie, niente fuffa.</p>
+      <ul class="news-perks">
+        <li>10% di sconto sul primo ordine, valido un mese</li>
+        <li>Accesso anticipato alle promozioni e ai vini in arrivo</li>
+        <li>Inviti alle degustazioni in enoteca prima di tutti gli altri</li>
+        <li>Una mail vera ogni due settimane, di Stefano e Maria Teresa</li>
+      </ul>
+    </div>
+    <form class="news-form" onsubmit="event.preventDefault()">
+      <div class="news-form-eyebrow">Iscriviti ora</div>
+      <h3>Ricevi il 10% sul primo ordine</h3>
+      <p>Codice sconto via mail subito dopo l'iscrizione.</p>
+      <label for="email">Indirizzo email</label>
+      <input id="email" type="email" placeholder="tua@email.it" required>
+      <div class="privacy">
+        <input type="checkbox" id="priv" required>
+        <label for="priv">Acconsento al trattamento dei dati come da Privacy Policy e a ricevere comunicazioni promozionali</label>
+      </div>
+      <button type="submit">Ricevi il codice sconto →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="faq-head">
+      <span class="eyebrow">Domande che ci fate spesso</span>
+      <h2>Le risposte alle <em>domande vere</em></h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">Come scegliete i vini in catalogo?<span class="plus">+</span></div>
+        <div class="faq-a">Andiamo in cantina, parliamo con i produttori, assaggiamo. Le bottiglie che entrano in enoteca sono quelle che ci sono piaciute al primo sorso e che continuano a piacerci dopo dieci aperture. Niente algoritmi, niente "fascia di prezzo da coprire". Quando un vino non ci convince più, esce dal catalogo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">I prezzi sono davvero in linea con Tannico e Callmewine?<span class="plus">+</span></div>
+        <div class="faq-a">Sì, e nella maggior parte dei casi siamo più bassi. Aggiorniamo ogni settimana un confronto su tre etichette di benchmark (Le Difese, Barolo Bussia, Tignanello), e lo trovi nella sezione "Trasparenza prezzi". Se trovi la stessa bottiglia a meno presso un grande e-commerce nazionale, segnalacela e te la pareggiamo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Come spedite? Cosa succede se il pacco si rompe?<span class="plus">+</span></div>
+        <div class="faq-a">Spediamo con corriere espresso GLS in 24-48h. Le bottiglie viaggiano in scatole rinforzate con polistirolo a celle, una bottiglia per cella. Se un pacco arriva con una bottiglia rotta, ce ne occupiamo noi: ti rispediamo gratuitamente la sostituzione il giorno stesso o ti rimborsiamo. Mai successo che qualcuno abbia dovuto fare assicurazioni o pratiche.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Posso parlare con un sommelier prima di comprare?<span class="plus">+</span></div>
+        <div class="faq-a">Sì, ed è il modo in cui preferiamo lavorare. Scrivi a Stefano su WhatsApp al numero in fondo alla pagina o usa il pulsante "Parla con Stefano" in alto a destra. Ti risponde personalmente, di solito entro un'ora. Senza appuntamento, senza costi, senza obblighi di acquisto.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Spedite anche all'estero?<span class="plus">+</span></div>
+        <div class="faq-a">In Italia spediamo direttamente dal sito. Per spedizioni fuori Italia ci occupiamo noi caso per caso: scrivici via mail o WhatsApp dicendoci paese di destinazione e bottiglie, e ti facciamo un preventivo entro la giornata.</div>
+      </div>
+
+    </div>
+    <p class="faq-foot">Hai un'altra domanda? <a href="#">Scrivi a Stefano su WhatsApp</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="vinifera-logo.png" alt="Vinifera Enoteca">
+        <p>Enoteca con store fisico nel centro storico di Locorotondo e spedizione in tutta Italia. 600 etichette selezionate, food artigianale, degustazioni guidate. Dal 2020.</p>
+        <div class="footer-social">
+          <a href="#">IG</a>
+          <a href="#">FB</a>
+          <a href="#">TT</a>
+          <a href="#">YT</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Lo shop</h4>
+        <ul>
+          <li><a href="#">Tutto il catalogo</a></li>
+          <li><a href="#">Vini per regione</a></li>
+          <li><a href="#">Wine box e regali</a></li>
+          <li><a href="#">Food e abbinamenti</a></li>
+          <li><a href="#">Promozioni</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>L'enoteca</h4>
+        <ul>
+          <li><a href="#">Chi siamo</a></li>
+          <li><a href="#">Esperienze e degustazioni</a></li>
+          <li><a href="#">Personal Sommelier</a></li>
+          <li><a href="#">Storie dal vicolo</a></li>
+          <li><a href="#">Lavora con noi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Vieni a trovarci</h4>
+        <p>
+          <strong>Indirizzo</strong>
+          Via Eroi di Dogali 12, 70010<br>Locorotondo (BA), Puglia
+          <strong>Orari</strong>
+          Lun-Dom · 10:00-23:00
+          <strong>Contatti</strong>
+          +39 080 123 4567<br>info@viniferaenoteca.it
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Vinifera Enoteca · P.IVA 0000000000</span>
+      <span>Privacy · Cookie · Termini · Spedizioni e resi</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="#" class="wa-fab">Parla con Stefano</a>
+
+</body>
+</html>

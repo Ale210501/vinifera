@@ -1,0 +1,91 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "760px",
+      "wideSize": "1280px"
+    },
+    "color": {
+      "defaultPalette": false,
+      "palette": [
+        { "slug": "base", "name": "Base", "color": "#ffffff" },
+        { "slug": "base-2", "name": "Base 2", "color": "#f3efde" },
+        { "slug": "contrast", "name": "Contrast", "color": "#1f1f1f" },
+        { "slug": "contrast-2", "name": "Contrast 2", "color": "#7a7568" },
+        { "slug": "primary", "name": "Primary", "color": "#5e293b" },
+        { "slug": "primary-dark", "name": "Primary Dark", "color": "#3d1a26" },
+        { "slug": "accent", "name": "Accent", "color": "#354c04" }
+      ]
+    },
+    "spacing": {
+      "units": ["%", "px", "em", "rem", "vh", "vw"]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--base)",
+      "text": "var(--wp--preset--color--contrast)"
+    },
+    "elements": {
+      "button": {
+        "border": {
+          "radius": "0px"
+        },
+        "typography": {
+          "fontWeight": "600"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    { "name": "header",                   "title": "Header",                    "area": "header" },
+    { "name": "footer",                   "title": "Footer",                    "area": "footer" },
+    { "name": "home-hero",                "title": "Home – Hero",               "area": "uncategorized" },
+    { "name": "home-trustbar",            "title": "Home – Trust Bar",          "area": "uncategorized" },
+    { "name": "home-reviews",             "title": "Home – Recensioni",         "area": "uncategorized" },
+    { "name": "home-featured-top",        "title": "Home – In evidenza Top",    "area": "uncategorized" },
+    { "name": "home-catalog",             "title": "Home – Catalogo",           "area": "uncategorized" },
+    { "name": "home-personal-sommelier",  "title": "Home – Sommelier",          "area": "uncategorized" },
+    { "name": "home-featured-puglia",     "title": "Home – In evidenza Puglia", "area": "uncategorized" },
+    { "name": "home-compare",             "title": "Home – Confronto",          "area": "uncategorized" },
+    { "name": "home-shipping",            "title": "Home – Spedizione",         "area": "uncategorized" },
+    { "name": "home-experiences",         "title": "Home – Esperienze",         "area": "uncategorized" },
+    { "name": "home-stories",             "title": "Home – Storie",             "area": "uncategorized" },
+    { "name": "home-newsletter",          "title": "Home – Newsletter",         "area": "uncategorized" },
+    { "name": "home-faq",                 "title": "Home – FAQ",                "area": "uncategorized" },
+    { "name": "home-whatsapp-fab",        "title": "Home – WhatsApp FAB",       "area": "uncategorized" },
+    { "name": "category-breadcrumb",      "title": "Categoria – Breadcrumb",    "area": "uncategorized" },
+    { "name": "category-intro",           "title": "Categoria – Intro",         "area": "uncategorized" },
+    { "name": "category-shop",            "title": "Categoria – Shop",          "area": "uncategorized" },
+    { "name": "category-ship",            "title": "Categoria – Spedizione",    "area": "uncategorized" },
+    { "name": "category-newsletter",      "title": "Categoria – Newsletter",    "area": "uncategorized" },
+    { "name": "food-intro",               "title": "Food – Intro",              "area": "uncategorized" },
+    { "name": "food-breadcrumb",          "title": "Food – Breadcrumb",         "area": "uncategorized" },
+    { "name": "food-pair",                "title": "Food – Abbinamento",        "area": "uncategorized" },
+    { "name": "food-oli",                 "title": "Food – Oli",                "area": "uncategorized" },
+    { "name": "food-formaggi",            "title": "Food – Formaggi",           "area": "uncategorized" },
+    { "name": "food-confetture",          "title": "Food – Confetture",         "area": "uncategorized" },
+    { "name": "food-forno",               "title": "Food – Forno",              "area": "uncategorized" },
+    { "name": "food-producers",           "title": "Food – Produttori",         "area": "uncategorized" },
+    { "name": "food-values",              "title": "Food – Valori",             "area": "uncategorized" },
+    { "name": "food-gift",                "title": "Food – Regalo",             "area": "uncategorized" },
+    { "name": "food-ship",                "title": "Food – Spedizione",         "area": "uncategorized" },
+    { "name": "food-newsletter",          "title": "Food – Newsletter",         "area": "uncategorized" },
+    { "name": "product-breadcrumb",       "title": "Prodotto – Breadcrumb",     "area": "uncategorized" },
+    { "name": "product-pdp-main",         "title": "Prodotto – PDP Main",       "area": "uncategorized" },
+    { "name": "product-spec",             "title": "Prodotto – Specifiche",     "area": "uncategorized" },
+    { "name": "product-taste",            "title": "Prodotto – Gusto",          "area": "uncategorized" },
+    { "name": "product-facts",            "title": "Prodotto – Fatti",          "area": "uncategorized" },
+    { "name": "product-abbinamenti",      "title": "Prodotto – Abbinamenti",    "area": "uncategorized" },
+    { "name": "product-sommelier",        "title": "Prodotto – Sommelier",      "area": "uncategorized" },
+    { "name": "product-why",              "title": "Prodotto – Perché",         "area": "uncategorized" },
+    { "name": "product-reviews",          "title": "Prodotto – Recensioni",     "area": "uncategorized" },
+    { "name": "product-related",          "title": "Prodotto – Correlati",      "area": "uncategorized" },
+    { "name": "product-bundle",           "title": "Prodotto – Bundle",         "area": "uncategorized" },
+    { "name": "product-ship",             "title": "Prodotto – Spedizione",     "area": "uncategorized" },
+    { "name": "product-stickybar",        "title": "Prodotto – Sticky Bar",     "area": "uncategorized" },
+    { "name": "product-newsletter",       "title": "Prodotto – Newsletter",     "area": "uncategorized" }
+  ]
+}
